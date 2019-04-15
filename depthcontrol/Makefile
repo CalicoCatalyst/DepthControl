@@ -1,4 +1,6 @@
-
+ARCHS = arm64
+TARGET = iphone:clang:11.2:11.2
+SYSROOT = $(THEOS)/sdks/iPhoneOS11.2.sdk
 include $(THEOS)/makefiles/common.mk
 
 TWEAK_NAME = DepthControl
@@ -8,5 +10,5 @@ include $(THEOS_MAKE_PATH)/tweak.mk
 
 after-install::
 	install.exec "killall -9 com.apple.camera"
-
-export ARCHS = armv7 armv7s arm64
+SUBPROJECTS += depthcontrol
+include $(THEOS_MAKE_PATH)/aggregate.mk

@@ -1,12 +1,34 @@
 #import <UIKit/UIKit.h>
 
+static NSMutableDictionary *settings = [[NSMutableDictionary alloc]
+                                      initWithContentsOfFile:[
+                                      @"/var/mobile/Library/Preferences/com.llama.depthcontrol.plist" stringByExpandingTildeInPath]];
+BOOL tweakEnabled = YES;
+
+static void loadPrefs() {
+        static NSMutableDictionary *preferences = [[NSMutableDictionary alloc] initWithContentsOfFile:@"/var/mobile/Library/Preferences/com.llama.depthcontrol.plist"]; //Load settings the old way.
+        tweakEnabled = [[preferences objectForKey:@"dcenabled"] boolValue];
+
+        [preferences release];
+}
+
+%ctor {
+        NSAutoreleasePool *pool = [NSAutoreleasePool new];
+        loadPrefs();
+        [pool release];
+}
+
 @interface CAMCaptureCapabilities
 @end
 
 %hook CAMCaptureCapabilities
 
 -(bool) isDepthEffectApertureSupported {
-	return TRUE;
+	if (tweakEnabled) {
+		return TRUE;
+	}else{
+		return FALSE;
+	}
 }
 %end
 
@@ -16,15 +38,27 @@
 %hook FigCaptureSourceVideoFormat
 
 -(float)minSimulatedAperture {
+	if (tweakEnabled) {
 		return 1.4;
+	}else{
+		return 1.4;
+	}
 }
 
 -(float)maxSimulatedAperture {
+	if (tweakEnabled) {
 		return 16;
+	}else{
+		return 16;
+	}
 }
 
 -(float)defaultSimulatedAperture {
+	if (tweakEnabled) {
 		return 4.5;
+	}else{
+		return 4.5;
+	}
 }
 %end
 
@@ -34,41 +68,72 @@
 %hook AVCaptureDeviceFormat
 
 -(float)minSimulatedAperture {
+	if (tweakEnabled) {
 		return 1.4;
+	}else{
+		return 1.4;
+	}
 }
 
 -(float)maxSimulatedAperture {
+	if (tweakEnabled) {
 		return 16;
+	}else{
+		return 16;
+	}
 }
 
 -(float)defaultSimulatedAperture {
+	if (tweakEnabled) {
 		return 4.5;
+	}else{
+		return 4.5;
+	}
 }
 %end
 
-@interface CAMLightingControl
+@interface PUCropToolController
 @end
 
-%hook CAMLightingControl
+%hook PUCropToolController
 
--(void)setCenter:(CGPoint)argument {
-return %orig;
+-(void)viewWillAppear:(BOOL)argument {
+	if (tweakEnabled) {
+		return %orig;
+	}else{
+		return %orig;
+	}
+}
+
+-(void)viewWillDissappear:(BOOL)argument {
+	if (tweakEnabled) {
+		return %orig;
+	}else{
+		return %orig;
+	}
 }
 %end
 
-@interface CAMApertureButton
+@interface PUFiltersToolController
 @end
 
-%hook CAMApertureButton
+%hook PUFiltersToolController
 
--(void)setFrame:(CGRect)argument {
-return %orig;
+-(void)viewWillAppear:(BOOL)argument {
+	if (tweakEnabled) {
+		return %orig;
+	}else{
+		return %orig;
+	}
 }
 
--(void)layoutSubviews {
-return %orig;
+-(void)viewWillDissappear:(BOOL)argument {
+	if (tweakEnabled) {
+		return %orig;
+	}else{
+		return %orig;
+	}
 }
-
 %end
 
 @interface PUAdjustmentsToolController
@@ -77,11 +142,19 @@ return %orig;
 %hook PUAdjustmentsToolController
 
 -(void)viewWillAppear:(BOOL)argument {
+	if (tweakEnabled) {
 		return %orig;
+	}else{
+		return %orig;
+	}
 }
 
 -(void)viewWillDissappear:(BOOL)argument {
+	if (tweakEnabled) {
 		return %orig;
+	}else{
+		return %orig;
+	}
 }
 %end
 
@@ -91,13 +164,23 @@ return %orig;
 %hook PURedeyeToolController
 
 -(void)viewWillAppear:(BOOL)argument {
+	if (tweakEnabled) {
 		return %orig;
+	}else{
+		return %orig;
+	}
 }
 
 -(void)viewWillDissappear:(BOOL)argument {
+	if (tweakEnabled) {
 		return %orig;
+	}else{
+		return %orig;
+	}
 }
 %end
+
+
 
 @interface CAMViewfinderViewController
 @end
@@ -105,7 +188,10 @@ return %orig;
 %hook CAMViewfinderViewController
 
 -(bool) _shouldEnableApertureButton {
+	if (tweakEnabled) {
 		return TRUE;
+	}else{
+		return FALSE;
+	}
 }
 %end
-
