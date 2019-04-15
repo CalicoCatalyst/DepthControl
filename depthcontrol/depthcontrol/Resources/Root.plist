@@ -13,14 +13,6 @@
 			<string>banner.png</string>
 		</dict>
 		<dict>
-			<key>cellClass</key>
-			<string>HBTwitterCell</string>
-			<key>label</key>
-			<string>JBrownLlama</string>
-			<key>user</key>
-			<string>jbrownllama</string>
-		</dict>
-		<dict>
 			<key>cell</key>
 			<string>PSGroupCell</string>
 			<key>label</key>
@@ -48,13 +40,13 @@
 			<key>label</key>
 			<string>Other</string>
 			<key>footerText</key>
-			<string>Utilities</string>
+			<string>Camera app must be restarted for changes to take effect. Springboard must be restarted for lock screen camera to update.</string>
 			<key>isStaticText</key>
 			<true/>
 		</dict>
 		<dict>
 			<key>action</key>
-			<string>killcam</string>
+			<string>killcam:</string>
 			<key>cell</key>
 			<string>PSButtonCell</string>
 			<key>label</key>
@@ -62,11 +54,41 @@
 		</dict>
 		<dict>
 			<key>action</key>
-			<string>respring</string>
+			<string>respring:</string>
 			<key>cell</key>
 			<string>PSButtonCell</string>
 			<key>label</key>
 			<string>Respring</string>
+		</dict>
+		<dict>
+			<key>cell</key>
+			<string>PSGroupCell</string>
+			<key>label</key>
+			<string>Authors</string>
+			<key>footerText</key>
+			<string></string>
+			<key>isStaticText</key>
+			<true/>
+		</dict>
+		<dict>
+        <key>cellClass</key>
+        <string>HBTwitterCell</string>
+        <key>label</key>
+        <string>JbrownLlama</string>
+        <key>showAvatar</key>
+        <true/>
+        <key>user</key>
+        <string>jbrownllama_</string>
+    </dict>
+		<dict>
+			<key>cellClass</key>
+			<string>HBTwitterCell</string>
+			<key>showAvatar</key>
+			<true/>
+			<key>label</key>
+			<string>CalicoCat</string>
+			<key>user</key>
+			<string>calico_catalyst</string>
 		</dict>
 	</array>
 	<key>title</key>

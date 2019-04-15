@@ -9,6 +9,6 @@ DepthControl_FILES = Tweak.xm
 include $(THEOS_MAKE_PATH)/tweak.mk
 
 after-install::
-	install.exec "killall -9 com.apple.camera"
+	install.exec "killall -9 Camera"
 SUBPROJECTS += depthcontrol
 include $(THEOS_MAKE_PATH)/aggregate.mk
