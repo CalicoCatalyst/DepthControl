@@ -1,0 +1,97 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE plist PUBLIC "-//Apple//DTD PLIST 1.0//EN" "http://www.apple.com/DTDs/PropertyList-1.0.dtd">
+<plist version="1.0">
+<dict>
+	<key>items</key>
+	<array>
+		<dict>
+			<key>cell</key>
+			<string>PSGroupCell</string>
+			<key>headerCellClass</key>
+			<string>HBImageTableCell</string>
+			<key>icon</key>
+			<string>banner.png</string>
+		</dict>
+		<dict>
+			<key>cell</key>
+			<string>PSGroupCell</string>
+			<key>label</key>
+			<string>DepthControl</string>
+			<key>footerText</key>
+			<string>Enable manual depth control on any dual camera phone</string>
+			<key>isStaticText</key>
+			<true/>
+		</dict>
+		<dict>
+			<key>cell</key>
+			<string>PSSwitchCell</string>
+			<key>default</key>
+			<true/>
+			<key>defaults</key>
+			<string>com.llama.depthcontrol</string>
+			<key>key</key>
+			<string>dcenabled</string>
+			<key>label</key>
+			<string>Enable Depth Control</string>
+		</dict>
+		<dict>
+			<key>cell</key>
+			<string>PSGroupCell</string>
+			<key>label</key>
+			<string>Other</string>
+			<key>footerText</key>
+			<string>Camera app must be restarted for changes to take effect. Springboard must be restarted for lock screen camera to update.</string>
+			<key>isStaticText</key>
+			<true/>
+		</dict>
+		<dict>
+			<key>action</key>
+			<string>killcam:</string>
+			<key>cell</key>
+			<string>PSButtonCell</string>
+			<key>label</key>
+			<string>Restart Camera App</string>
+		</dict>
+		<dict>
+			<key>action</key>
+			<string>respring:</string>
+			<key>cell</key>
+			<string>PSButtonCell</string>
+			<key>label</key>
+			<string>Respring</string>
+		</dict>
+		<dict>
+			<key>cell</key>
+			<string>PSGroupCell</string>
+			<key>label</key>
+			<string>Authors</string>
+			<key>footerText</key>
+			<string></string>
+			<key>isStaticText</key>
+			<true/>
+		</dict>
+		<dict>
+        <key>cellClass</key>
+        <string>HBTwitterCell</string>
+        <key>label</key>
+        <string>JbrownLlama</string>
+        <key>showAvatar</key>
+        <true/>
+        <key>user</key>
+        <string>jbrownllama_</string>
+    </dict>
+		<dict>
+			<key>cellClass</key>
+			<string>HBTwitterCell</string>
+			<key>showAvatar</key>
+			<true/>
+			<key>label</key>
+			<string>CalicoCat</string>
+			<key>user</key>
+			<string>calico_catalyst</string>
+		</dict>
+	</array>
+	<key>title</key>
+	<string>DepthControl</string>
+</dict>
+</plist>
