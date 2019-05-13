@@ -1,23 +1,78 @@
 #import <UIKit/UIKit.h>
 
-static NSMutableDictionary *settings = [[NSMutableDictionary alloc]
-                                      initWithContentsOfFile:[
-                                      @"/var/mobile/Library/Preferences/com.llama.depthcontrol.plist" stringByExpandingTildeInPath]];
-BOOL tweakEnabled = YES;
+static BOOL tweakEnabled = YES;
 
-static void loadPrefs() {
-        static NSMutableDictionary *preferences = [[NSMutableDictionary alloc] initWithContentsOfFile:@"/var/mobile/Library/Preferences/com.llama.depthcontrol.plist"]; //Load settings the old way.
-        tweakEnabled = [[preferences objectForKey:@"dcenabled"] boolValue];
 
-        [preferences release];
+#define kIdentifier @"com.llama.depthcontrol"
+#define kSettingsChangedNotification (CFStringRef)@"com.llama.depthcontrol/settingschanged"
+#define kSettingsPath @"/var/mobile/Library/Preferences/com.llama.depthcontrol.plist"
+
+
+
+NSDictionary *prefs = nil;
+
+static void reloadPrefs() {
+	if ([NSHomeDirectory() isEqualToString:@"/var/mobile"]) {
+		CFArrayRef keyList = CFPreferencesCopyKeyList((CFStringRef)kIdentifier, kCFPreferencesCurrentUser, kCFPreferencesAnyHost);
+		if (keyList) {
+			prefs = (NSDictionary *)CFPreferencesCopyMultiple(keyList, (CFStringRef)kIdentifier, kCFPreferencesCurrentUser, kCFPreferencesAnyHost);
+			if (!prefs) {
+				prefs = [NSDictionary new];
+			}
+			CFRelease(keyList);
+		}
+	} else {
+		prefs = [NSDictionary dictionaryWithContentsOfFile:kSettingsPath];
+	}
+}
+
+static BOOL boolValueForKey(NSString *key, BOOL defaultValue) {
+	return (prefs && [prefs objectForKey:key]) ? [[prefs objectForKey:key] boolValue] : defaultValue;
+}
+/*
+static CGFloat doubleValuePerApp(NSString *appId, NSString *prefix, CGFloat defaultValue) {
+	if (prefs) {
+		for (NSString *key in [prefs allKeys]) {
+			if ([key hasPrefix:prefix]) {
+				NSString *tempId = [key substringFromIndex:[prefix length]];
+				if ([tempId isEqualToString:appId]) {
+					return [prefs objectForKey:key] ? [[prefs objectForKey:key] floatValue] : defaultValue;
+				}
+			}
+		}
+	}
+	return defaultValue;
+}
+
+static BOOL boolValuePerApp(NSString *appId, NSString *prefix, BOOL defaultValue) {
+	if (prefs) {
+		for (NSString *key in [prefs allKeys]) {
+			if ([key hasPrefix:prefix]) {
+				NSString *tempId = [key substringFromIndex:[prefix length]];
+				if ([tempId isEqualToString:appId]) {
+					return [prefs objectForKey:key] ? [[prefs objectForKey:key] boolValue] : defaultValue;
+				}
+			}
+		}
+	}
+	return defaultValue;
+}
+
+static NSString *stringValueForKey(NSString *key, NSString *defaultValue) {
+	return (prefs && [prefs objectForKey:key]) ? [prefs objectForKey:key] : defaultValue;
+}
+*/
+static void preferencesChanged() {
+	CFPreferencesAppSynchronize((CFStringRef)kIdentifier);
+	reloadPrefs();
+
+	tweakEnabled = boolValueForKey(@"dcenabled", YES);
 }
 
 %ctor {
-        NSAutoreleasePool *pool = [NSAutoreleasePool new];
-        loadPrefs();
-        [pool release];
+	preferencesChanged();
+	CFNotificationCenterAddObserver(CFNotificationCenterGetDarwinNotifyCenter(), NULL, (CFNotificationCallback)preferencesChanged, kSettingsChangedNotification, NULL, CFNotificationSuspensionBehaviorDeliverImmediately);
 }
-
 @interface CAMCaptureCapabilities
 @end
 
@@ -193,5 +248,20 @@ static void loadPrefs() {
 	}else{
 		return FALSE;
 	}
+}
+%end
+
+@interface CAMApertureButton : UIView
+@end
+
+%hook CAMApertureButton
+-(void) layoutSubviews {
+  %orig;
+  NSArray *subs = [self.subviews[0] subviews];
+  for (UIView *subview in subs) {
+    UILabel *label = (UILabel *)subview;
+    NSString *labelText = (NSString *)@"ƒ";
+    label.text = labelText;
+  }
 }
 %end
