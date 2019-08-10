@@ -1,7 +1,7 @@
 Package: com.llama.depthcontrol
 Name: Depth Control
 Depends: mobilesubstrate, ws.hbang.common (>= 1.11)
-Version: 2.2.0
+Version: 2.3.0
 Architecture: iphoneos-arm
 Description: Enable Depth Control on any dual camera phone
 Maintainer: Jbrownllama

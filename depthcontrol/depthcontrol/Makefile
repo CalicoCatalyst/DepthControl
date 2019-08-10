@@ -1,10 +1,11 @@
-ARCHS = arm64
+PACKAGE_VERSION=$(THEOS_PACKAGE_BASE_VERSION)
+ARCHS = arm64 arm64e
 TARGET = iphone:clang:11.2:11.2
 SYSROOT = $(THEOS)/sdks/iPhoneOS11.2.sdk
 include $(THEOS)/makefiles/common.mk
 
 BUNDLE_NAME = depthcontrol
-depthcontrol_FILES = SDCRootListController.m
+depthcontrol_FILES = Preferences.m SDCAppearanceSettings.m SDCListItemsController.m
 depthcontrol_INSTALL_PATH = /Library/PreferenceBundles
 depthcontrol_FRAMEWORKS = UIKit
 depthcontrol_EXTRA_FRAMEWORKS = Cephei CepheiPrefs

@@ -154,17 +154,17 @@ static void preferencesChanged() {
 
 -(void)viewWillAppear:(BOOL)argument {
 	if (tweakEnabled) {
-		return %orig;
+		%orig(argument);
 	}else{
-		return %orig;
+		%orig(argument);
 	}
 }
 
 -(void)viewWillDissappear:(BOOL)argument {
 	if (tweakEnabled) {
-		return %orig;
+		%orig(argument);
 	}else{
-		return %orig;
+		%orig(argument);
 	}
 }
 %end
@@ -176,17 +176,17 @@ static void preferencesChanged() {
 
 -(void)viewWillAppear:(BOOL)argument {
 	if (tweakEnabled) {
-		return %orig;
+		%orig(argument);
 	}else{
-		return %orig;
+		%orig(argument);
 	}
 }
 
 -(void)viewWillDissappear:(BOOL)argument {
 	if (tweakEnabled) {
-		return %orig;
+		%orig(argument);
 	}else{
-		return %orig;
+		%orig(argument);
 	}
 }
 %end
@@ -198,17 +198,17 @@ static void preferencesChanged() {
 
 -(void)viewWillAppear:(BOOL)argument {
 	if (tweakEnabled) {
-		return %orig;
+		%orig(argument);
 	}else{
-		return %orig;
+		%orig(argument);
 	}
 }
 
 -(void)viewWillDissappear:(BOOL)argument {
 	if (tweakEnabled) {
-		return %orig;
+		%orig(argument);
 	}else{
-		return %orig;
+		%orig(argument);
 	}
 }
 %end
@@ -220,17 +220,17 @@ static void preferencesChanged() {
 
 -(void)viewWillAppear:(BOOL)argument {
 	if (tweakEnabled) {
-		return %orig;
+		%orig(argument);
 	}else{
-		return %orig;
+		%orig(argument);
 	}
 }
 
 -(void)viewWillDissappear:(BOOL)argument {
 	if (tweakEnabled) {
-		return %orig;
+		%orig(argument);
 	}else{
-		return %orig;
+		%orig(argument);
 	}
 }
 %end
